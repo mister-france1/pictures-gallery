@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, TextField } from '@mui/material';
-import './register.scss';
+import styles from './register.module.scss';
 
 interface OwnProps {}
 
@@ -15,27 +15,27 @@ const RegisterPage: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <div className="page">
-            <Card className="form">
-                <div className="inputWrapper">
-                    <TextField id="username" label="Username" variant="standard" className="input" />
+        <div className={styles.page}>
+            <Card className={styles.form}>
+                <div className={styles.inputWrapper}>
+                    <TextField id="username" label="Username" variant="standard" className={styles.input} />
                 </div>
 
-                <div className="inputWrapper">
-                    <TextField id="email" label="Email" variant="standard" className="input" />
+                <div className={styles.inputWrapper}>
+                    <TextField id="email" label="Email" variant="standard" className={styles.input} />
                 </div>
 
-                <div className="inputWrapper">
-                    <TextField id="password" label="Password" variant="standard" className="input" />
+                <div className={styles.inputWrapper}>
+                    <TextField id="password" label="Password" variant="standard" className={styles.input} />
                 </div>
 
-                <div className="registerWrapper">
-                    <Button variant="contained" className="registerButton" onClick={register}>Register</Button>
+                <div className={styles.buttonWrapper}>
+                    <Button variant="contained" className={styles.button} onClick={register}>Register</Button>
                 </div>
 
-                <div className="info">
+                <div className={styles.info}>
                     Already have an account?
-                    <Link to="/login" className="loginLink"> Login </Link>
+                    <Link to="/login" className={styles.link}> Login </Link>
                 </div>
             </Card>
         </div>

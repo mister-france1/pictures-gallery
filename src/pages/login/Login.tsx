@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, TextField } from '@mui/material';
-import './login.scss';
+import styles from './login.module.scss';
 
 interface OwnProps {
 }
@@ -16,23 +16,23 @@ const LoginPage: FunctionComponent<Props> = (props) => {
     };
 
     return (
-        <div className="page">
-            <Card className="form">
-                <div className="inputWrapper">
-                    <TextField id="username" label="Username" variant="standard" className="input" />
+        <div className={styles.page}>
+            <Card className={styles.form}>
+                <div className={styles.inputWrapper}>
+                    <TextField id="username" label="Username" variant="standard" className={styles.input} />
                 </div>
 
-                <div className="inputWrapper">
-                    <TextField id="password" label="Password" variant="standard" className="input" />
+                <div className={styles.inputWrapper}>
+                    <TextField id="password" label="Password" variant="standard" className={styles.input} />
                 </div>
 
-                <div className="loginWrapper">
-                    <Button variant="contained" className="loginButton" onClick={login}>Login</Button>
+                <div className={styles.buttonWrapper}>
+                    <Button variant="contained" className={styles.button} onClick={login}>Login</Button>
                 </div>
 
-                <div className="info">
+                <div className={styles.info}>
                     Need an account?
-                    <Link to="/register" className="registerLink"> Register </Link>
+                    <Link to="/register" className={styles.link}> Register </Link>
                 </div>
             </Card>
         </div>
