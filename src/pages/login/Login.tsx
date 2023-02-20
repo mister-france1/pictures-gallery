@@ -13,17 +13,19 @@ type Props = OwnProps;
 const LoginPage: FunctionComponent<Props> = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [postRequest, {data}]: AxiosPost = useAxiosPost();
+    const [postRequest, {data, error, loaded}]: AxiosPost = useAxiosPost();
     const navigate = useNavigate();
 
     const login = async () => {
         await postRequest('/auth/authenticate', {name: username, password});
-        navigate('/');
     };
 
     useEffect(() => {
-        console.log('data ', data);
-    }, [data]);
+        if (data && loaded) {
+            localStorage.setItem('user', JSON.stringify(data));
+            navigate('/');
+        }
+    }, [data, error, loaded]);
 
     return (
         <div className={styles.page}>
@@ -36,6 +38,7 @@ const LoginPage: FunctionComponent<Props> = (props) => {
 
                 <div className={styles.inputWrapper}>
                     <TextField id="password" label="Password" variant="standard" className={styles.input}
+                               type="password"
                                value={password}
                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}/>
                 </div>

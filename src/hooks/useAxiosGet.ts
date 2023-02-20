@@ -1,22 +1,15 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
-import { AxiosPost } from '../models/axios';
+import { AxiosGet } from '../models/axios';
 
-export const useAxiosPost = (): AxiosPost => {
+export const useAxiosGet = (): AxiosGet => {
     const [data, setData] = useState<null | Response>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loaded, setLoaded] = useState<boolean>(false);
 
-    const postRequest = useCallback(async (url: string, payload?: any, signal?: any, headers?: any): Promise<void> => {
+    const getRequest = useCallback(async (url: string): Promise<void> => {
         try {
-            const response = await axios.post(
-                url,
-                payload,
-                {
-                    signal,
-                    headers
-                }
-            );
+            const response = await axios.get(url);
 
             setData(response.data);
         } catch (error: any) {
@@ -30,5 +23,5 @@ export const useAxiosPost = (): AxiosPost => {
         setLoaded
     ]);
 
-    return [postRequest, {data, error, loaded}];
+    return [getRequest, { data, error, loaded }];
 };

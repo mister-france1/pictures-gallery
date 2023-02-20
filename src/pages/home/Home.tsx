@@ -1,34 +1,29 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './home.module.scss';
 import { AxiosPost } from '../../models/axios';
-import { useAxiosPost } from '../../hooks/useAxiosPost';
+import { useAxiosGet } from '../../hooks/useAxiosGet';
+import FileUpload from '../../components/FileUpload';
 
 export interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
-    const [postRequest, {data}]: AxiosPost = useAxiosPost();
+    const [getRequest, {data}]: AxiosPost = useAxiosGet();
 
     useEffect(() => {
         (async () => {
-            await postRequest('/');
+            await getRequest('/auth/authorized');
         })();
     }, []);
 
     useEffect(() => {
-        console.log('data ', data);
+        console.log('authorized ', data);
     }, [data]);
 
     return (
         <div className={styles.page}>
-            <h1>This is the home page.</h1>
-            <p>
-                <Link to="/login">Go to the Login Page!</Link>
-                <br/>
-                <br/>
-                <br/>
-                <Link to="/register">Go to the Register Page!</Link>
-            </p>
+            <div>
+                <FileUpload />
+            </div>
         </div>
     );
 };
