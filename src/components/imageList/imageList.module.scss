@@ -1,0 +1,11 @@
+.imageList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 480px) {
+  .imageList {
+    flex-direction: column;
+  }
+}

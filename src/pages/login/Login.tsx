@@ -2,8 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, TextField } from '@mui/material';
 import styles from './login.module.scss';
-import { AxiosPost } from '../../models/axios';
 import { useAxiosPost } from '../../hooks/useAxiosPost';
+import { TokenData } from '../../models/auth';
 
 interface OwnProps {
 }
@@ -13,7 +13,7 @@ type Props = OwnProps;
 const LoginPage: FunctionComponent<Props> = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [postRequest, {data, error, loaded}]: AxiosPost = useAxiosPost();
+    const [postRequest, {data, error, loaded}] = useAxiosPost<TokenData>();
     const navigate = useNavigate();
 
     const login = async () => {

@@ -1,28 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styles from './home.module.scss';
-import { AxiosPost } from '../../models/axios';
 import { useAxiosGet } from '../../hooks/useAxiosGet';
-import FileUpload from '../../components/FileUpload';
+import FileUpload from '../../components/fileUpload/FileUpload';
+import ImageList from '../../components/imageList/ImageList';
+import { ImageType } from '../../models/image';
 
 export interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
-    const [getRequest, {data}]: AxiosPost = useAxiosGet();
+    const [getRequest, {data}] = useAxiosGet<ImageType[]>();
+
+    const getFiles = useCallback(async () => {
+        await getRequest('/files');
+    }, [getRequest]);
 
     useEffect(() => {
-        (async () => {
-            await getRequest('/auth/authorized');
-        })();
+        getFiles();
     }, []);
 
     useEffect(() => {
-        console.log('authorized ', data);
+        console.log('authorized status: ', data);
     }, [data]);
+
+    const imageListBlock = data ? <ImageList images={data} /> : null;
 
     return (
         <div className={styles.page}>
+            <div className={styles.imageListWrapper}>
+                {imageListBlock}
+            </div>
             <div>
-                <FileUpload />
+                <FileUpload getFiles={getFiles} />
             </div>
         </div>
     );

@@ -2,8 +2,8 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { AxiosPost } from '../models/axios';
 
-export const useAxiosPost = (): AxiosPost => {
-    const [data, setData] = useState<null | Response>(null);
+export const useAxiosPost = <T> (): AxiosPost<T> => {
+    const [data, setData] = useState<null | T>(null);
     const [error, setError] = useState<Error | null>(null);
     const [loaded, setLoaded] = useState<boolean>(false);
 
