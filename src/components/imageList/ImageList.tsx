@@ -2,6 +2,7 @@ import React from 'react';
 import Image from '../image/Image';
 import styles from './imageList.module.scss';
 import { ImageType } from '../../models/image';
+import ImageWrapper from '../imageWrapper/ImageWrapper';
 
 type ImageListProps = {
     images: ImageType[];
@@ -11,7 +12,9 @@ const ImageList: React.FC<ImageListProps> = ({ images }) => {
     return (
         <div className={styles.imageList}>
             {images.map(image => (
-                <Image key={image.picture_id} src={image.resized_url} />
+                <ImageWrapper key={image.picture_id} url={image.url}>
+                    <Image src={image.resized_url} />
+                </ImageWrapper>
             ))}
         </div>
     );

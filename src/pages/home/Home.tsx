@@ -26,16 +26,16 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
         if (userJson) {
             const user: TokenData = JSON.parse(userJson);
 
-            await postRequest('/auth/logout', {
-                RefreshToken: user.refreshToken.token,
-                AccessToken: user.accessToken.jwtToken
+            await postRequest('/auth/logout', null, null, {
+                'Authorization-RefreshToken': user.refreshToken.token,
+                'Authorization-AccessToken': user.accessToken.jwtToken
             });
         }
 
         localStorage.removeItem('user');
         localStorage.removeItem('username');
         navigate('/login')
-    }, [postRequest]);
+    }, [postRequest, navigate]);
 
     useEffect(() => {
         const usernameJson = localStorage.getItem('username');
@@ -56,12 +56,14 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
     return (
         <div className={styles.page}>
             <Header username={username} logout={onLogout}/>
-            <div className={styles.imageListWrapper}>
-                {imageListBlock}
-            </div>
-            <div>
-                <FileUpload getFiles={getFiles} />
-            </div>
+            <main className={styles.main}>
+                <div className={styles.fileWrapper}>
+                    <FileUpload getFiles={getFiles} />
+                </div>
+                <div className={styles.imageListWrapper}>
+                    {imageListBlock}
+                </div>
+            </main>
         </div>
     );
 };

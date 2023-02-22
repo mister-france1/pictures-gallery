@@ -1,11 +1,28 @@
 .page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
     height: 100%;
+
+    .main {
+        margin: 100px 16px 16px;
+
+        .fileWrapper {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .imageListWrapper {
+            margin-top: 32px;
+        }
+    }
 }
 
-.imageListWrapper {
-    margin-bottom: 20px;
+@media only screen and (max-width: 600px) {
+    .page {
+        .main {
+            margin: 150px 16px 16px;
+
+            .fileWrapper {
+                width: 100%;
+            }
+        }
+    }
 }
