@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { TokenData } from '../models/auth';
+
 axios.interceptors.request.use(
     config => {
         const userJson = localStorage.getItem('user');
         if (userJson) {
-            const user = JSON.parse(userJson);
-            const token = user?.idToken?.jwtToken;
+            const user: TokenData = JSON.parse(userJson);
+            const token = user.idToken.jwtToken;
             if (token) {
                 config.headers['Authorization'] = 'bearer ' + token;
             }

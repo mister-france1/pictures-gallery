@@ -24,6 +24,7 @@ const RegisterPage: FunctionComponent<Props> = (props) => {
     useEffect(() => {
         if (data && loaded) {
             localStorage.setItem('user', JSON.stringify(data));
+            localStorage.setItem('username', JSON.stringify(data.accessToken.payload.username));
             navigate('/');
         }
     }, [data, error, loaded]);
