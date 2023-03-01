@@ -17,7 +17,7 @@ const LoginPage: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
 
     const login = async () => {
-        await postRequest('/auth/authenticate', {name: username, password});
+        await postRequest('/api/auth/authenticate', {name: username, password});
     };
 
     useEffect(() => {

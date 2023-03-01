@@ -18,7 +18,7 @@ const RegisterPage: FunctionComponent<Props> = (props) => {
     const navigate = useNavigate();
 
     const register = async () => {
-        await postRequest('/auth/register', {name: username, email, password});
+        await postRequest('/api/auth/register', {name: username, email, password});
     };
 
     useEffect(() => {

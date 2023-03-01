@@ -18,7 +18,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
     const navigate = useNavigate();
 
     const getFiles = useCallback(async () => {
-        await getRequest('/files');
+        await getRequest('/api/files');
     }, [getRequest]);
 
     const onLogout = useCallback(async () => {
@@ -26,7 +26,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
         if (userJson) {
             const user: TokenData = JSON.parse(userJson);
 
-            await postRequest('/auth/logout', null, null, {
+            await postRequest('/api/auth/logout', null, null, {
                 'Authorization-RefreshToken': user.refreshToken.token,
                 'Authorization-AccessToken': user.accessToken.jwtToken
             });

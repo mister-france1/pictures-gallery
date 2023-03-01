@@ -22,7 +22,7 @@ const FileUpload: FunctionComponent<Props> = (props: FileUploadProps) => {
         if (selectedFile) {
             const formData = new FormData();
             formData.append('file', selectedFile);
-            await postRequest('/files', formData, null, { 'Content-Type': 'multipart/form-data' });
+            await postRequest('/api/files', formData, null, { 'Content-Type': 'multipart/form-data' });
         }
     };
 
