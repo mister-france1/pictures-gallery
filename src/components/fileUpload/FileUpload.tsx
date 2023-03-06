@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import styles from './FileUpload.module.scss';
 import { useAxiosPost } from '../../hooks/useAxiosPost';
 
@@ -10,9 +10,10 @@ type Props = FileUploadProps;
 
 const FileUpload: FunctionComponent<Props> = (props: FileUploadProps) => {
     const { getFiles } = props;
-    const [postRequest, {data, error, loaded}] = useAxiosPost<string>();
+    const [postRequest] = useAxiosPost<string>();
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [dragging, setDragging] = useState(false);
+    const [dragging, setDragging] = useState<boolean>(false);
+    const [timeoutId, setTimeoutId] = useState<null | NodeJS.Timeout>();
 
     const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedFile(event.target.files?.[0] || null);
@@ -23,18 +24,20 @@ const FileUpload: FunctionComponent<Props> = (props: FileUploadProps) => {
             const formData = new FormData();
             formData.append('file', selectedFile);
             await postRequest('/api/files', formData, null, { 'Content-Type': 'multipart/form-data' });
+
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+
+            const id: ReturnType<typeof setTimeout> = setTimeout(async () => {
+                await getFiles();
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+            }, 5000);
+            setTimeoutId(id);
         }
     };
-
-    useEffect(() => {
-        if (data && loaded) {
-            console.log('File upload status: ', data);
-
-            setTimeout(() => {
-                getFiles();
-            }, 1000);
-        }
-    }, [data, error, loaded, getFiles]);
 
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
