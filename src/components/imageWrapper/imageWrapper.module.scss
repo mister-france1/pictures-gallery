@@ -1,7 +1,12 @@
 .imageWrapper {
   margin: 16px;
-}
 
-.url {
-  text-decoration: none;
+  .imageLinksWrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .url {
+      text-decoration: none;
+    }
+  }
 }

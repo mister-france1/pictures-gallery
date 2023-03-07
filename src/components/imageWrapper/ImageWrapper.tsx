@@ -1,21 +1,24 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import styles from './imageWrapper.module.scss';
+import { ImageType } from '../../models/image';
 
 interface OwnProps {
     children: ReactNode;
-    url: string;
+    image: ImageType;
 }
 
 type Props = OwnProps;
 
 const ImageWrapper: FunctionComponent<Props> = (props) => {
-    const { url, children } = props;
+    const { image, children } = props;
 
     return (
         <div className={styles.imageWrapper}>
             {children}
-            <div>
-                <a href={url} target="_blank" className={styles.url} download >Download original image</a>
+            <div className={styles.imageLinksWrapper}>
+                <a href={image.url} target="_blank" className={styles.url} download >100%</a>
+                <a href={image.resized50_url} target="_blank" className={styles.url} download >50%</a>
+                <a href={image.resized25_url} target="_blank" className={styles.url} download >25%</a>
             </div>
         </div>
     );
