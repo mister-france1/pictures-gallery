@@ -10,3 +10,11 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .imageWrapper {
+    .imageLinksWrapper {
+      max-width: 150px;
+    }
+  }
+}
