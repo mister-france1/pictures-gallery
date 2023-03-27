@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { TokenData } from '../models/auth';
 
+
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
 axios.interceptors.request.use(
     config => {
         const userJson = localStorage.getItem('user');
