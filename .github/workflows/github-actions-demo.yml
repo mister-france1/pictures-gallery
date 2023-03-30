@@ -1,13 +1,21 @@
 name: Gallery CI/CD
 run-name: ${{ github.actor }} is testing out Gallery CI/CD 🚀
-on: [push]
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: 16.x
+        node-version: [16.x]
+
     steps:
-      - name: Run build
-        run: npm run build
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm run build --if-present
