@@ -40,12 +40,7 @@ const validate = (values: Registration): ErrorRegistration => {
     return errors;
 };
 
-interface OwnProps {
-}
-
-type Props = OwnProps;
-
-const RegisterPage: FunctionComponent<Props> = (props) => {
+const RegisterPage: FunctionComponent = () => {
     const [postRequest, {data, error, loaded}] = useAxiosPost<TokenData>();
     const navigate = useNavigate();
 

@@ -9,9 +9,7 @@ import { useAxiosPost } from '../../hooks/useAxiosPost';
 import { useNavigate } from 'react-router-dom';
 import { TokenData } from '../../models/auth';
 
-export interface IHomePageProps {}
-
-const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
+const HomePage: React.FunctionComponent = () => {
     const [username, setUsername] = useState<string>('Guest');
     const [getRequest, {data}] = useAxiosGet<ImageType[]>();
     const [postRequest] = useAxiosPost();

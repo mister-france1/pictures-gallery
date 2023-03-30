@@ -23,12 +23,7 @@ const validate = (values: Login): ErrorLogin => {
     return errors;
 };
 
-interface OwnProps {
-}
-
-type Props = OwnProps;
-
-const LoginPage: FunctionComponent<Props> = (props) => {
+const LoginPage: FunctionComponent = () => {
     const [postRequest, {data, error, loaded}] = useAxiosPost<TokenData>();
     const navigate = useNavigate();
 

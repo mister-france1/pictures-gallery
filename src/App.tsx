@@ -4,10 +4,7 @@ import HomePage from './pages/home/Home';
 import LoginPage from './pages/login/Login';
 import RegisterPage from './pages/register/Register';
 
-export interface IApplicationProps {
-}
-
-const App: React.FunctionComponent<IApplicationProps> = (props) => {
+const App: React.FunctionComponent = () => {
     return (
         <BrowserRouter>
             <Routes>

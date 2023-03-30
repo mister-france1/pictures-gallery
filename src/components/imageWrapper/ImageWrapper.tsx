@@ -16,9 +16,9 @@ const ImageWrapper: FunctionComponent<Props> = (props) => {
         <div className={styles.imageWrapper}>
             {children}
             <div className={styles.imageLinksWrapper}>
-                <a href={image.url} target="_blank" className={styles.url} download >100%</a>
-                <a href={image.resized50_url} target="_blank" className={styles.url} download >50%</a>
-                <a href={image.resized25_url} target="_blank" className={styles.url} download >25%</a>
+                <a href={image.url} target="_blank" className={styles.url} download rel="noreferrer" >100%</a>
+                <a href={image.resized50_url} target="_blank" className={styles.url} download rel="noreferrer" >50%</a>
+                <a href={image.resized25_url} target="_blank" className={styles.url} download rel="noreferrer" >25%</a>
             </div>
         </div>
     );
