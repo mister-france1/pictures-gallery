@@ -41,3 +41,4 @@ jobs:
           aws-region: eu-west-2
       - name: Deploy to S3
         run: npm run deploy
+        
