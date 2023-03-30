@@ -21,4 +21,4 @@ jobs:
       - name: install modules
         run: npm install
       - name: build project
-        run: npm run build --if-present
+        run: npm run build
