@@ -30,7 +30,7 @@ jobs:
       - name: Run Lint
         run: npm run lint
       - name: Build project
-        run: npm run build
+        run: npm run build -- --base-url=${{ env.REACT_APP_BASE_URL }}
         env:
           CI: false
       - name: Set AWS credentials
@@ -41,4 +41,3 @@ jobs:
           aws-region: eu-west-2
       - name: Deploy to S3
         run: npm run deploy
-        
