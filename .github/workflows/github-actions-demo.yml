@@ -1,9 +1,12 @@
-name: GitHub Actions
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Gallery CI/CD
+run-name: ${{ github.actor }} is testing out Gallery CI/CD 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: 16.x
     steps:
       - name: Run build
         run: npm run build
