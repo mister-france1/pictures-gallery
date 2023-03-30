@@ -8,6 +8,8 @@ on:
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_BASE_URL: ${{ vars.REACT_APP_BASE_URL }}
     timeout-minutes: 10
     strategy:
       matrix:
@@ -30,7 +32,7 @@ jobs:
       - name: Run Lint
         run: npm run lint
       - name: Build project
-        run: npm run build -- --env.REACT_APP_BASE_URL=${{ vars.REACT_APP_BASE_URL }}
+        run: npm run build -- --env.REACT_APP_BASE_URL=${{ env.REACT_APP_BASE_URL }}
         env:
           CI: false
       - name: Set AWS credentials
