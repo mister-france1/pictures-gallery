@@ -24,7 +24,7 @@ const HomePage: React.FunctionComponent = () => {
         if (userJson) {
             const user: TokenData = JSON.parse(userJson);
 
-            await postRequest('/api/auth/logout', null, null, {
+            await postRequest('/api/auth/logout', null, undefined, {
                 'Authorization-RefreshToken': user.refreshToken.token,
                 'Authorization-AccessToken': user.accessToken.jwtToken
             });

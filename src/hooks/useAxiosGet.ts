@@ -4,7 +4,7 @@ import { AxiosGet } from '../models/axios';
 
 export const useAxiosGet = <T> (): AxiosGet<T> => {
     const [data, setData] = useState<null | T>(null);
-    const [error, setError] = useState<Error | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [loaded, setLoaded] = useState<boolean>(false);
 
     const getRequest = useCallback(async (url: string): Promise<void> => {
@@ -12,8 +12,12 @@ export const useAxiosGet = <T> (): AxiosGet<T> => {
             const response = await axios.get(url);
 
             setData(response.data);
-        } catch (error: any) {
-            setError(error.message);
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                setError(error.message);
+            } else {
+                setError('An unexpected error occurred');
+            }
         } finally {
             setLoaded(true);
         }
